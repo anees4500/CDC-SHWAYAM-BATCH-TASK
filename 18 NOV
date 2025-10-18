@@ -1,0 +1,85 @@
+// Question 18
+// Diameter of BT
+
+class Solution {
+    public int Height(TreeNode root){
+        if(root==null){
+            return 0;
+        }
+        int lh = Height(root.left);
+        int rh = Height(root.right);
+        return 1+Math.max(lh,rh);
+    }
+    public int diameterOfBinaryTree(TreeNode root) {
+        if(root==null){
+            return 0;
+        }
+        int lh = Height(root.left);
+        int rh = Height(root.right);
+        int ld = diameterOfBinaryTree(root.left);
+        int rd = diameterOfBinaryTree(root.right);
+
+        int selfD = lh + rh;
+
+        return Math.max(selfD,Math.max(ld,rd));
+    }
+}
+
+// Question 2
+// path sum of BT
+
+ class Solution {
+    public boolean helper(TreeNode root, int sum, int target) {
+        if (root == null) return false;
+
+         
+        if (root.left == null && root.right == null && sum + root.val == target) {
+            return true;
+        }
+
+        return helper(root.left, sum + root.val, target) || 
+               helper(root.right, sum + root.val, target);
+    }
+
+    public boolean hasPathSum(TreeNode root, int targetSum) {
+        if (root == null) return false;
+        return helper(root, 0, targetSum);
+    }
+}
+
+// Question 3
+
+// validate the BST
+
+ 
+class Solution {
+     
+     
+    public  void helper(TreeNode root, ArrayList<Integer>  ans ){
+        if(root==null){
+            return ;
+        }
+
+        helper(root.left, ans);
+        ans.add(root.val);
+        helper(root.right, ans);
+
+    }
+
+    public boolean isValidBST(TreeNode root) {
+        ArrayList<Integer> ans = new ArrayList<>();
+
+        helper(root,ans);
+
+        for(int i = 1; i<ans.size(); i++){
+            if(ans.get(i)<=ans.get(i-1)){
+                return false;
+            }
+        }
+
+        return true;
+
+
+    }
+}
+
