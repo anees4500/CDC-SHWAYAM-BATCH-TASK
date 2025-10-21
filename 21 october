@@ -1,0 +1,117 @@
+// Question 1
+
+ class Solution {
+    public static int helper(int num){
+        int x = 0;
+        
+        while((1<<x)<=num){
+            x++;
+        }
+        return x-1;
+    }
+    public static int countSetBits(int n) {
+        // int count = 0;
+        // n++; // since we count from 0 to n
+        // for (int i = 0; (1 << i) <= n; i++) {
+        //     int cycleLen = 1 << (i + 1);
+        //     count += (n / cycleLen) * (1 << i)
+        //           + Math.max(0, n % cycleLen - (1 << i));
+        // }
+        // return count;
+        
+        if(n==0) return 0;
+        
+        int x = helper(n);
+        
+        int bitsup = x*(1<<x-1);
+        
+        int above = n - (1<<x)+1;
+        
+        int rest = n - (1<<x) ;
+        
+        int ans = bitsup + above + countSetBits(rest);
+        return ans;
+        
+        
+    }
+}
+
+
+// Question 2
+
+ class Solution {
+    static int toggleBits(int n, int l, int r) {
+        int mask = 1 << (l - 1);
+        int i = l;
+
+        while (i <= r) {
+            n = n ^ mask;   // ✅ use XOR to toggle
+            mask = mask << 1;
+            i++;
+        }
+
+        return n;
+    }
+}
+
+
+// Question 3 
+
+class CheckBit {
+    static boolean checkKthBit(int n, int k) {
+        // code here
+        int mask = 1<<k;
+        
+        if((n & mask ) != 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+}
+
+// Qustion 4
+
+ class Solution {
+    public boolean isPowerOfTwo(int n) {
+        if (n <= 0) return false;
+        while (n % 2 == 0) {
+            n /= 2;
+        }
+        return n == 1;
+    }
+}
+
+
+// Question 5
+
+class Solution {
+    public int count(int n){
+        int mask = 1;
+        int count = 0;
+        while(n>0){
+            if((n&1)!=0){
+                count++;
+            }
+            n = n>>1;
+        }
+
+        return count;
+    }
+    public int[] countBits(int n) {
+        int[] ans = new int[n+1];
+
+        for(int i = 0; i<=n; i++ ){
+
+            int out = count(i);
+
+            ans[i] = out;
+
+
+        }
+        return ans;
+    }
+}
+
+
