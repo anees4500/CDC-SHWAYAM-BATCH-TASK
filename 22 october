@@ -1,0 +1,82 @@
+// Question 1 
+
+class Solution {
+    public void helper(int[] arr, int i ,  List<List<Integer>> ans, List<Integer> lt){
+        
+        if(i == arr.length){
+            ans.add(new ArrayList<>(lt));
+            return;
+        }
+        
+        lt.add(arr[i]);
+        
+        helper(arr, i+1, ans,lt );
+        lt.remove(lt.size()-1);
+        helper(arr,i+1,ans,lt);
+        
+
+
+    }
+    public List<List<Integer>> subsets(int[] nums) {
+         List<List<Integer>> ans = new ArrayList<>();
+         List<Integer> arr = new ArrayList<>();
+
+         helper(nums,0,ans,arr);
+         return ans;
+    }
+}
+
+// Question 2
+
+class Solution {
+    public void helper(int[] arr, List<List<Integer>> ans , List<Integer> list, boolean freq[]){
+        if(list.size()==arr.length){
+            ans.add(new ArrayList<>(list));
+            return;
+        }
+        for(int i = 0; i<arr.length; i++){
+            if(!freq[i]){
+                freq[i]=true;
+                list.add(arr[i]);
+                helper(arr,ans, list,freq);
+                list.remove(list.size()-1);
+                freq[i]= false;
+            }
+        }
+    }
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> ans = new ArrayList<>();
+
+        List<Integer> list = new ArrayList<>();
+
+        boolean freq[] = new boolean[nums.length];
+
+        helper(nums,ans,list,freq);
+        return ans;
+    }
+}
+
+
+// Question 3
+
+ class Solution {
+    public void helper(int[] arr, int i, List<List<Integer>> ans, List<Integer> list) {
+        ans.add(new ArrayList<>(list));
+
+        for (int j = i; j < arr.length; j++) {
+             
+            if (j > i && arr[j] == arr[j - 1]) continue;
+
+            list.add(arr[j]);
+            helper(arr, j + 1, ans, list);
+            list.remove(list.size() - 1);
+        }
+    }
+
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        Arrays.sort(nums);  
+        List<List<Integer>> ans = new ArrayList<>();
+        helper(nums, 0, ans, new ArrayList<>());
+        return ans;
+    }
+}
