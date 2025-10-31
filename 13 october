@@ -1,0 +1,379 @@
+// Question 1
+// Reverse the array
+
+ import java.util.* ;
+import java.io.*; 
+
+public class Solution 
+{
+    public static void reverseArray(ArrayList<Integer> arr, int m)
+    {
+        // Start from m+1 till the end of array
+        int left = m + 1;
+        int right = arr.size() - 1;
+
+        // Swap elements using two-pointer method
+        while(left < right) {
+            int temp = arr.get(left);
+            arr.set(left, arr.get(right));
+            arr.set(right, temp);
+            left++;
+            right--;
+        }
+    }
+}
+
+
+// Question 2 
+// Deletion max and min element
+
+ class Solution {
+    public int minimumDeletions(int[] nums) {
+        int n = nums.length;
+        int minVal = Integer.MAX_VALUE;
+        int maxVal = Integer.MIN_VALUE;
+        int minIdx = 0, maxIdx = 0;
+
+        // find indices of min and max
+        for (int i = 0; i < n; i++) {
+            if (nums[i] < minVal) {
+                minVal = nums[i];
+                minIdx = i;
+            }
+            if (nums[i] > maxVal) {
+                maxVal = nums[i];
+                maxIdx = i;
+            }
+        }
+
+        // Option 1: remove from front both elements
+        int front = Math.max(minIdx, maxIdx) + 1;
+
+        // Option 2: remove from back both elements
+        int back = n - Math.min(minIdx, maxIdx);
+
+        // Option 3: remove one from front, one from back
+        int both = Math.min(minIdx + 1 + (n - maxIdx),
+                            maxIdx + 1 + (n - minIdx));
+
+        // Minimum of all 3
+        return Math.min(front, Math.min(back, both));
+    }
+}
+
+
+// Question 3 
+// Running sum
+
+class Solution {
+    public int[] runningSum(int[] nums) {
+
+        int sum = 0;
+        int[] ans = new int[nums.length];
+
+        for(int i = 0; i<nums.length; i++){
+            ans[i] = nums[i] + sum;
+            sum +=nums[i];
+        }
+
+        return ans;
+    }
+}
+
+// Question 4 
+// Maximun Frequency element
+
+ import java.util.*;
+
+class Solution {
+    public int maxFrequencyElements(int[] nums) {
+        HashMap<Integer, Integer> ans = new HashMap<>();
+
+        // Count frequencies
+        for (int num : nums) {
+            ans.put(num, ans.getOrDefault(num, 0) + 1);
+        }
+
+        // Find max frequency
+        int max = 0;
+        for (int freq : ans.values()) {
+            max = Math.max(max, freq);
+        }
+
+        // Sum all elements with max frequency
+        int sum = 0;
+        for (int freq : ans.values()) {
+            if (freq == max) {
+                sum += freq;
+            }
+        }
+
+        return sum;
+    }
+}
+
+// Question 5
+// reverse the array 
+
+ class Solution {
+    public void rotate(int[] nums, int k) {
+        int n = nums.length;
+        k = k % n;  
+        reverse(nums, 0, n - 1);       
+        reverse(nums, 0, k - 1);      
+        reverse(nums, k, n - 1);       
+    }
+
+    private void reverse(int[] nums, int left, int right) {
+        while (left < right) {
+            int temp = nums[left];
+            nums[left] = nums[right];
+            nums[right] = temp;
+            left++;
+            right--;
+        }
+    }
+}
+
+// Question 6
+
+class Main {
+
+    // Function to implement
+    // search operation
+    static int findElement(int arr[], int n, int key)
+    {
+        for (int i = 0; i < n; i++)
+            if (arr[i] == key)
+                return i;
+
+        // If the key is not found
+        return -1;
+    }
+}
+
+// Question 7
+// Remove the duplicate value
+
+ class Solution {
+    public int removeDuplicates(int[] nums) {
+        if (nums.length == 0)  return 0;
+
+        int i = 0;
+        for (int j = 1; j < nums.length; j++) {
+            if (nums[j] != nums[i]) {
+                i++;
+                nums[i] = nums[j];
+            }
+        }
+        return i + 1;
+    }
+}
+
+
+// Question 8 
+// Remove duplicating return these element
+
+
+public class Main
+{
+	static void findRepeatingElements(int arr[]) {
+	    Arrays.sort(arr);
+	    
+	    System.out.print("The repeating elements are: ");
+	    for(int i=0;i<arr.length-1;i++) 
+	        if(arr[i] == arr[i+1])
+	            System.out.print(arr[i]+" ");
+	}
+	public static void main(String[] args) {
+		int[] arr = {1,1,2,3,4,4,5,2};
+		findRepeatingElements(arr);
+	}
+}
+
+
+//  Question 9 
+// pivot index
+
+class Solution {
+    public int sum(int[] arr, int i , int j ){
+        int s = 0;
+        while(i<j){
+           s+=arr[i];
+           i++;
+        }
+        return s;
+    }
+    public int pivotIndex(int[] nums) {
+        if(nums.length==1) return 0;
+
+        for(int i = 0; i<nums.length; i++){
+            int sum1 = sum(nums, 0 , i);
+            int sum2 = sum(nums, i+1, nums.length);
+            if(sum1==sum2){
+                return i;
+            }
+        }
+        return -1;
+    }
+}
+
+// Question 10 
+// Bubble sort
+
+ class Solution {
+    public void bubbleSort(int[] arr) {
+        int n = arr.length;
+        
+        for (int i = 0; i < n - 1; i++) {
+            boolean swapped = false; // optimization: check if sorted
+            
+            for (int j = 0; j < n - i - 1; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    // swap
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                    swapped = true;
+                }
+            }
+
+            // if no swaps happened, array is sorted
+            if (!swapped) break;
+        }
+    }
+}
+
+// Question 11
+// selection sort
+
+class Solution {
+    public void selectionSort(int[] arr) {
+        int n = arr.length;
+
+        for (int i = 0; i < n - 1; i++) {
+            int minIndex = i;
+
+            // find the smallest element in remaining array
+            for (int j = i + 1; j < n; j++) {
+                if (arr[j] < arr[minIndex]) {
+                    minIndex = j;
+                }
+            }
+
+            // swap the found minimum element with the first element
+            int temp = arr[i];
+            arr[i] = arr[minIndex];
+            arr[minIndex] = temp;
+        }
+    }
+}
+
+
+// Question 12
+// Insertion sort
+
+class Solution {
+    public void insertionSort(int[] arr) {
+        int n = arr.length;
+
+        for (int i = 1; i < n; i++) {
+            int key = arr[i];
+            int j = i - 1;
+
+            // Move elements greater than key to one position ahead
+            while (j >= 0 && arr[j] > key) {
+                arr[j + 1] = arr[j];
+                j--;
+            }
+
+            // Place key at correct position
+            arr[j + 1] = key;
+        }
+    }
+}
+
+// Question 13
+// Intersection 
+
+class Solution {
+    public boolean isContain(int tar, int[] arr){
+        for(int i = 0; i<arr.length; i++){
+            if(tar==arr[i]){
+                return true;
+            }
+        }
+        return false;
+    }
+    public int[] intersection(int[] nums1, int[] nums2) {
+        int k = 0;
+
+        Set<Integer> set = new  HashSet<>();
+        for(int i = 0; i<nums1.length; i++){
+            if(isContain(nums1[i],nums2)){
+                set.add(nums1[i]);
+            }
+        }
+        int[] res = new int[set.size()];
+        int idx = 0;
+        for(int sets : set){
+
+            res[idx++] =  sets;
+        }
+
+        return res;
+
+    }
+}
+
+
+// Question 14
+// Maximum subarray
+
+class Solution {
+    public int maxSubArray(int[] nums) {
+         int maxSum = Integer.MIN_VALUE;
+         int currSum = 0;
+
+
+
+         for(int i = 0; i<nums.length; i++){
+             currSum = Math.max(nums[i],currSum+nums[i]);
+             maxSum = Math.max(currSum,maxSum);
+         }
+         return maxSum;
+    }
+}
+
+// Question 15
+// maxProduct 
+
+class Solution {
+    public int maxProduct(int[] nums) {
+        int maxProd = nums[0];
+        int minProd = nums[0];
+        int result = nums[0];
+
+        for (int i = 1; i < nums.length; i++) {
+            int curr = nums[i];
+
+            if (curr < 0) {
+                // swap because negative flips sign
+                int temp = maxProd;
+                maxProd = minProd;
+                minProd = temp;
+            }
+
+            // compute new max and min
+            maxProd = Math.max(curr, maxProd * curr);
+            minProd = Math.min(curr, minProd * curr);
+
+            result = Math.max(result, maxProd);
+        }
+
+        return result;
+    }
+}
+
+
+
