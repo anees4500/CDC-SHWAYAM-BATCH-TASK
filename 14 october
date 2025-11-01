@@ -1,0 +1,171 @@
+// Question 1
+// count character 
+
+import java.util.*;
+public class Main
+{
+public static void Printfrequency(String str)
+  {
+    int[] freq = new int[26];
+    for (int i = 0; i < str.length(); i++)
+    {
+      freq[str.charAt(i) - 'a']++;
+    }
+    for (int i = 0; i < 26; i++)
+    {
+      if (freq[i] != 0)
+      {
+        System.out.print((char)(i + 'a'));
+        System.out.print(freq[i] + " ");
+      }
+    }
+  }
+
+public static void main(String args[])
+  {
+    String str = "takeuforward";
+    Printfrequency(str);
+  }
+}
+
+
+// Question 2
+// 
+
+ class Solution {
+    public char getMaxOccuringChar(String s) {
+        int[] freq = new int[26]; // lowercase English letters assumed
+        for (char c : s.toCharArray()) {
+            freq[c - 'a']++;
+        }
+
+        int max = 0;
+        char ans = 'a';
+        for (int i = 0; i < 26; i++) {
+            if (freq[i] > max) {
+                max = freq[i];
+                ans = (char) (i + 'a');
+            }
+        }
+        return ans;
+    }
+}
+
+
+// Question 3
+// Removing the duplicate from the String
+
+// User function Template for Java
+
+class Solution {
+    String removeDuplicates(String s) {
+        
+        Set<Character> set  = new HashSet<>();
+        
+         
+        
+        StringBuilder sb = new StringBuilder();
+        
+        for(int i = 0; i<s.length(); i++){
+            
+            
+            
+            if(!set.contains(s.charAt(i))){
+                sb.append(s.charAt(i));
+            }
+            set.add(s.charAt(i));
+        }
+        
+        return sb.toString();
+    }
+}
+
+// Question 4 
+// Factorial of a Integer
+
+class Solution {
+    // Function to calculate factorial of a number.
+    
+    int factorial(int n) {
+        // code here
+        if(n==1)return 1;
+        return n * factorial(n-1);
+    }
+}
+
+
+// Question 5
+// power of the number 
+
+class Solution {
+    public int reverseExponentiation(int n) {
+        // code here
+        
+        String str = String.valueOf(n);
+        StringBuilder sb = new StringBuilder();
+        
+        for(int i = str.length()-1; i>=0; i-- ){
+            if(i== str.length()-1 && str.charAt(i) ==0)continue;
+            sb.append(str.charAt(i));
+        }
+        
+        String ans = sb.toString();
+        
+        int num = Integer.parseInt(ans);
+        
+        return (int)Math.pow(n,num);
+        
+        
+    }
+}
+
+
+// Question 6
+// Print 1 to N 
+
+class Solution {
+    static void print(int n , int i){
+        if(i==n+1) return ;
+        
+        System.out.print(i+" ");
+        print(n,i+1);
+    }
+    static void printTillN(int N) {
+        // code here
+        print(N , 1);
+    }
+}
+
+// Question 7 
+// count digits in the number
+
+class Solution {
+    public int countDigits(int n) {
+        // code here
+        int count = 0;
+        while(n>0){
+            count++;
+            n = n/10;
+        }
+        return count;
+    }
+}
+
+
+// Question 8
+// sum of the array
+
+// User function Template for Java
+
+class Solution {
+    int ans(int[] arr, int i){
+        if(i==arr.length) return 0;
+        
+          
+        return arr[i]+ ans(arr,i+1);
+    }
+    int arraySum(int arr[]) {
+        // code here
+        return ans(arr, 0 );
+    }
+}
