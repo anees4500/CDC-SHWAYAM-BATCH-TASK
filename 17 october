@@ -1,0 +1,69 @@
+// Question 1
+// Loower Bound
+
+class Solution {
+     
+    int lowerBound(int[] arr, int target) {
+        // code here
+        
+        int ans = arr.length;
+        for(int i = 0; i<arr.length; i++){
+            if(target == arr[i] || target<arr[i]){
+                ans  = i;
+                break;
+            }
+        }
+        
+        return ans;
+    }
+}
+
+
+// Question 2
+// Uppper Bound
+
+class Solution {
+    int upperBound(int[] arr, int target) {
+        // code here
+        for(int i = 0; i<arr.length ; i++){
+            if(arr[i]>target){
+                return i;
+            }
+        }
+        return arr.length;
+    }
+}
+
+
+// Question 3
+// koko eating banana
+
+class Solution {
+    public int check(int[] piles, int k) {
+        int count = 0;
+        for (int pile : piles) {
+            count += (int)Math.ceil((double)pile / k);
+        }
+        return count;
+    }
+
+    public int minEatingSpeed(int[] piles, int h) {
+        int lp = 1;
+        int rp = Arrays.stream(piles).max().getAsInt();
+        int ans = rp;
+
+        while (lp <= rp) {
+            int mid = lp + (rp - lp) / 2;
+            int ch = check(piles, mid);
+
+            if (ch <= h) {
+                ans = mid;
+                rp = mid - 1;
+            } else {
+                lp = mid + 1;
+            }
+        }
+
+        return ans;
+    }
+}
